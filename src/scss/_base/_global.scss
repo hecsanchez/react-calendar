@@ -1,0 +1,61 @@
+// --------------------------------
+// GLOBAL
+// --------------------------------
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Raleway', sans-serif;
+}
+
+.calendar {
+  clear: both;
+}
+
+.days {
+  padding-top: 4em;
+  .day,
+  .dayHeader {
+    padding: 0.5em;
+    text-align: center;
+    float: left;
+    width: (100% / 7);
+  }
+  .day {
+    padding: 3em 1em;
+    border: 1px solid #ebebeb;
+
+    transition: all .3s ease;
+
+    &:not(.pale) {
+      cursor: pointer;
+      
+      &:hover {
+        background: #ebebeb;
+      }
+    }
+  }
+  .pale {
+    color: #aaa;
+  }
+
+  .dayHeader {
+    font-weight: 600;
+  }
+}
+
+.monthHeader {
+    padding: 0.5em;
+    text-align: center;
+    font-weight: 900;
+    width: 100%;
+    margin: 2em 0 0em;
+}
+
+.goPreviousMonth,
+.goNextMonth {
+  text-align: center;
+  float: left;
+  width: (100% / 7);
+}
