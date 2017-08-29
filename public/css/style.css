@@ -36,7 +36,7 @@ html {
   clear: both; }
 
 .days {
-  padding-top: 4em; }
+  padding: 4em; }
   .days .day,
   .days .dayHeader {
     padding: 0.5em;
@@ -44,15 +44,23 @@ html {
     float: left;
     width: 14.2857142857%; }
   .days .day {
-    padding: 3em 1em;
+    padding: 4em 1em;
     border: 1px solid #ebebeb;
+    position: relative;
     transition: all .3s ease; }
     .days .day:not(.pale) {
       cursor: pointer; }
       .days .day:not(.pale):hover {
-        background: #ebebeb; }
+        background: #ff6363;
+        color: #fff; }
+    .days .day span.date {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 13px; }
   .days .pale {
-    color: #aaa; }
+    color: #aaa;
+    background: #ebebeb; }
   .days .dayHeader {
     font-weight: 600; }
 

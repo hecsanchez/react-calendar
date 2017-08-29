@@ -14,7 +14,7 @@ html {
 }
 
 .days {
-  padding-top: 4em;
+  padding: 4em;
   .day,
   .dayHeader {
     padding: 0.5em;
@@ -23,21 +23,30 @@ html {
     width: (100% / 7);
   }
   .day {
-    padding: 3em 1em;
+    padding: 4em 1em;
     border: 1px solid #ebebeb;
-
+    position: relative;
     transition: all .3s ease;
 
     &:not(.pale) {
       cursor: pointer;
-      
+
       &:hover {
-        background: #ebebeb;
+        background: #ff6363;
+        color: #fff;
       }
+    }
+
+    span.date {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 13px;
     }
   }
   .pale {
     color: #aaa;
+    background: #ebebeb;
   }
 
   .dayHeader {
