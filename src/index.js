@@ -5,13 +5,14 @@ import { createStore } from 'redux'
 import { extendMoment } from 'moment-range';
 const moment = extendMoment(Moment);
 
-moment.locale('mx')
+moment.locale('es')
 
 class Calendar extends React.Component {
   static defaultProps = {
     date: moment()
   };
 
+  // !!!!! DEPRECATED !!!!!
   // static propTypes = {
   //   date: React.PropTypes.object.isRequired
   // };
@@ -19,6 +20,20 @@ class Calendar extends React.Component {
   constructor(props) {
     super(props)
     this.days = this.days.bind(this)
+  }
+
+  hours() {
+    var hours = []
+    let range = moment.range(
+      moment(this.props.date).startOf('day'),
+      moment(this.props.date).endOf('day')
+    )
+
+    for (let hour of range.by('hours')) {
+      hours.push(<li key={hour.format('HH')} className={"hour"}>{hour.format('HH')}</li>)
+    }
+
+    return hours
   }
 
   days() {
@@ -30,18 +45,10 @@ class Calendar extends React.Component {
 
     for (let day of range.by('days')) {
       let belongsToAsideMonth = !day.isSame(moment(this.props.date), 'month')
-      console.log('belongsToAsideMonth')
-      days.push(<li key={day.format('YYYY-MM-DD')} className={"day" + (belongsToAsideMonth ? ' pale' : '')}>{day.format(' D')}</li>)
+      days.push(<li key={day.format('D')} className={"day" + (belongsToAsideMonth ? ' pale' : '')}><span className="date">{day.format('D')}</span>
+      </li>)
     }
 
-      console.log("Days", moment.range(
-        moment(this.props.date).startOf('month').startOf('week'),
-        moment(this.props.date).endOf('month').endOf('week')
-      ).by('days', (day) => {
-
-        let belongsToAsideMonth = !day.isSame(moment(this.props.date), 'month')
-        days.push(<li key={day.format('YYYY-MM-DD')} className={"day" + (belongsToAsideMonth ? ' pale' : '')}>{day.format('D')}</li>)
-      }));
     return days;
   }
 
@@ -82,9 +89,9 @@ class Calendar extends React.Component {
 var store = createStore((state = {date: moment().format('YYYY-MM-DD')}, action) => {
   switch (action.type) {
     case 'INCREMENT_MONTH':
-      return {date: moment(state.date).add(1, 'months')}
+      return {date: moment(state.date).add(1, 'months').format('YYYY-MM-DD')}
     case 'DECREMENT_MONTH':
-      return {date: moment(state.date).subtract(1, 'months')}
+      return {date: moment(state.date).subtract(1, 'months').format('YYYY-MM-DD')}
     case 'CHANGE_DATE':
       console.log('CHANGE_DATE', action)
       return {date: action['date']}
